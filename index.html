@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Счетчик сигарет</title>
     <meta name="description" content="PWA приложение для отслеживания потребления сигарет">
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="/smoking-counter/manifest.json">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚬</text></svg>">
     <style>
         * {
@@ -332,6 +332,19 @@
             // Установка обработчиков событий
             document.getElementById('increment').addEventListener('click', incrementCounter);
             document.getElementById('reset').addEventListener('click', resetDay);
+            
+            // Регистрация Service Worker (если поддерживается)
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                    navigator.serviceWorker.register('/smoking-counter/sw.js')
+                    .then(function(registration) {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(function(registrationError) {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+                });
+            }
         }
         
         // Обновление интерфейса

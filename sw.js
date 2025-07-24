@@ -1,7 +1,7 @@
 const CACHE_NAME = 'smoking-counter-v1';
 const urlsToCache = [
-  '/',
-  '/index.html'
+  '/smoking-counter/',
+  '/smoking-counter/index.html'
 ];
 
 self.addEventListener('install', event => {
